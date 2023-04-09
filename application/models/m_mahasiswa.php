@@ -10,12 +10,31 @@ class m_mahasiswa extends CI_Model
         else
             $this->db->order_by();
         return $this->db->get($this->table);
+
         //SELECT * FROM mahasiswa ORDER BY nim asc
     }
+
     function hapus($nim)
     {
         $this->db->where($this->primary, $nim);
         $this->db->delete($this->table);
+
         //DELETE FROM mahasiswa WHERE nim = $nim;
+    }
+
+    function simpanData($data = null)
+    {
+        $this->db->insert('mahasiswa', $data);
+    }
+
+    function edit_data($where,$table)
+    {
+        return $this->db->get_where($table,$where);
+    }
+
+    function update_data($where,$data,$table)
+    {
+        $this->db->where($where);
+        $this->db->update($table,$data);
     }
 }
